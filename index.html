@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Clarence ♡</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #b9e3ff, #fff2a8, #e0f2ff);
+    color: #34516b;
+}
+
+.card {
+    width: 100%;
+    max-width: 480px;
+    padding: 30px 22px;
+    background: white;
+    border: 2px solid #ffe27a;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 10px 35px #6096c533;
+}
+
+.heart {
+    font-size: 48px;
+    color: #e7b928;
+}
+
+h1 {
+    color: #397bb5;
+    font-size: 28px;
+}
+
+#message {
+    font-size: 17px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    margin: 25px 0;
+}
+
+button {
+    padding: 12px 28px;
+    margin: 5px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.yes {
+    background: #4b9bd5;
+    color: white;
+}
+
+.no {
+    background: #fff0a6;
+    color: #65521c;
+}
+
+button:hover { opacity: 0.85; }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <div class="heart">♡</div>
+    <h1 id="heading">Hi Clarence!</h1>
+    <p id="subtitle">Please don't skip this! :D</p>
+    <div id="message">Do you wish to proceed?</div>
+
+    <div id="buttons">
+        <button class="yes" onclick="firstYes()">Yes ♡</button>
+        <button class="no" onclick="sayNo()">No</button>
+    </div>
+</div>
+
+<script>
+const heading = document.getElementById("heading");
+const subtitle = document.getElementById("subtitle");
+const message = document.getElementById("message");
+const buttons = document.getElementById("buttons");
+
+let typingTimer;
+
+function typeText(text, speed = 30) {
+    clearTimeout(typingTimer);
+    message.textContent = "";
+    let i = 0;
+
+    function typeNext() {
+        if (i < text.length) {
+            message.textContent += text.charAt(i);
+            i++;
+            typingTimer = setTimeout(typeNext, speed);
+        }
+    }
+    typeNext();
+}
+
+function firstYes() {
+    heading.textContent = "Are you sure? ♡";
+    subtitle.textContent = "Think carefully! :D";
+
+    typeText(
+        "Once you say yes, there is no going back. Are you sure?",
+        20
+    );
+
+    buttons.innerHTML = `
+        <button class="yes" onclick="secondYes()">Yes ♡</button>
+        <button class="no" onclick="sayNo()">No</button>
+    `;
+}
+
+function secondYes() {
+    heading.textContent = "Hiii, Clarence! ♡";
+    subtitle.textContent = "There's something I want to tell you.";
+    buttons.innerHTML = "";
+
+    const confession =
+        "Hiii!! I know this is a really interesting way to tell you this, but here we are.\n\n" +
+        "I just wanted to let you know that I love you very very much, and you mean sooo much to me.\n\n" +
+        "Your simple presence and smile light up my world.\n\n" +
+        "I know this is really sudden, but I just cannot hide it anymore.\n\n" +
+        "You dont have to say yes, but do you wanna be together again?\n\n" +
+        "I know that that is a really big question to ask, but I promise you, i will be better.\n\n" +
+        "I hope everything will go well if you ever say yes. Again, no pressure, I just wanted to be honest with you. :))\n\n" +
+        "Love, Zul ♡";
+
+    typeText(confession, 30);
+}
+
+function sayNo() {
+    clearTimeout(typingTimer);
+    heading.textContent = "That's okay ♡";
+    subtitle.textContent = "";
+    buttons.innerHTML = "";
+    typeText("Awww it's okay, maybe next time. :>", 30);
+}
+</script>
+
+</body>
+</html>
