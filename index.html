@@ -1,154 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Message For You ♡</title>
-<style>
-* { box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Little Message for You 𑣲ᢉ𐭩 </title>
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    font-family: Georgia, serif;
-    background: linear-gradient(135deg, #b9e3ff, #fff2a8, #e0f2ff);
-    color: #34516b;
-}
-
-.card {
-    width: 100%;
-    max-width: 480px;
-    padding: 30px 22px;
-    background: white;
-    border: 2px solid #ffe27a;
-    border-radius: 24px;
-    text-align: center;
-    box-shadow: 0 10px 35px #6096c533;
-}
-
-.heart {
-    font-size: 48px;
-    color: #e7b928;
-}
-
-h1 {
-    color: #397bb5;
-    font-size: 28px;
-}
-
-#message {
-    font-size: 17px;
-    line-height: 1.8;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    margin: 25px 0;
-}
-
-button {
-    padding: 12px 28px;
-    margin: 5px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    font-family: inherit;
-}
-
-.yes {
-    background: #4b9bd5;
-    color: white;
-}
-
-.no {
-    background: #fff0a6;
-    color: #65521c;
-}
-
-button:hover { opacity: 0.85; }
-</style>
-</head>
-<body>
-
-<div class="card">
-    <div class="heart">♡</div>
-    <h1 id="heading">Hi Clarence!</h1>
-    <p id="subtitle">Please don't skip this! :D</p>
-    <div id="message">Do you wish to proceed?</div>
-
-    <div id="buttons">
-        <button class="yes" onclick="firstYes()">Yes ♡</button>
-        <button class="no" onclick="sayNo()">No</button>
-    </div>
-</div>
-
-<script>
-const heading = document.getElementById("heading");
-const subtitle = document.getElementById("subtitle");
-const message = document.getElementById("message");
-const buttons = document.getElementById("buttons");
-
-let typingTimer;
-
-function typeText(text, speed = 30) {
-    clearTimeout(typingTimer);
-    message.textContent = "";
-    let i = 0;
-
-    function typeNext() {
-        if (i < text.length) {
-            message.textContent += text.charAt(i);
-            i++;
-            typingTimer = setTimeout(typeNext, speed);
-        }
+  <style>
+    * {
+      box-sizing: border-box;
     }
-    typeNext();
-}
 
-function firstYes() {
-    heading.textContent = "Are you sure? ♡";
-    subtitle.textContent = "Think carefully! :D";
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: "Trebuchet MS", sans-serif;
+      color: #315879;
+      background: linear-gradient(135deg, #b9e3ff, #fff2a8, #e0f2ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 14px;
+    }
 
-    typeText(
-        "Once you say yes, there is no going back. Are you sure?",
-        20
-    );
+    .decoration {
+      position: fixed;
+      font-size: 25px;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 5s ease-in-out infinite;
+      opacity: 0.8;
+    }
 
-    buttons.innerHTML = `
-        <button class="yes" onclick="secondYes()">Yes ♡</button>
-        <button class="no" onclick="sayNo()">No</button>
-    `;
-}
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+      }
+      50% {
+        transform: translateY(-18px) rotate(8deg);
+      }
+    }
 
-function secondYes() {
-    heading.textContent = "Hiii, Clarence! ♡";
-    subtitle.textContent = "There's something I want to tell you.";
-    buttons.innerHTML = "";
+    .container {
+      width: 100%;
+      max-width: 540px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 30px 22px;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 12px 35px rgba(64, 119, 160, 0.16);
+      backdrop-filter: blur(8px);
+    }
 
-    const confession =
-        "Hiii!! I know this is a really interesting way to tell you this, but here we are.\n\n" +
-        "I just wanted to let you know that I love you very very much, and you mean sooo much to me.\n\n" +
-        "Your simple presence and smile light up my world.\n\n" +
-        "I know this is really sudden, but I just cannot hide it anymore.\n\n" +
-        "You dont have to say yes, but do you wanna be together again?\n\n" +
-        "I know that that is a really big question to ask, but I promise you, i will be better.\n\n" +
-        "I hope everything will go well if you ever say yes. Again, no pressure, I just wanted to be honest with you. :))\n\n" +
-        "Love, Zul ♡";
+    h1 {
+      font-size: clamp(25px, 6vw, 34px);
+      margin: 0 0 14px;
+      color: #376b9a;
+    }
 
-    typeText(confession, 30);
-}
+    p {
+      line-height: 1.7;
+    }
 
-function sayNo() {
-    clearTimeout(typingTimer);
-    heading.textContent = "That's okay ♡";
-    subtitle.textContent = "";
-    buttons.innerHTML = "";
-    typeText("Awww it's okay, maybe next time. :>", 30);
-}
-</script>
+    .subtitle {
+      margin-bottom: 25px;
+    }
 
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 13px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-family: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 12px rgba(49, 88, 121, 0.15);
+    }
+
+    .yes {
+      background: #8bcaff;
+      color: #234e72;
+    }
+
+    .no {
+      background: #ffe58b;
+      color: #725a18;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    #response,
+    #response2 {
+      font-weight: bold;
+      margin-top: 22px;
+      min-height: 28px;
+      color: #527c9d;
+    }
+
+    .envelope {
+      width: 125px;
+      height: 85px;
+      position: relative;
+      margin: 20px auto 25px;
+      background: #8bcaff;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(49, 88, 121, 0.14);
+      transition: transform 0.3s;
+    }
+
+    .envelope:hover {
+      transform: translateY(-5px);
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #c8e8ff;
+      clip-path: polygon(0 0, 100% 0, 50% 60%);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .envelope::after {
+      content: "💌";
+      position: absolute;
+      top: 31px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 29px;
+    }
+
+    .letter {
+      text-align: left;
+      background: #fffdf3;
+      border: 2px solid #f4df91;
+      border-radius: 18px;
+      padding: 25px 22px;
+      margin-top: 18px;
+      box-shadow: 0 8px 20px rgba(64, 119, 160, 0.1);
+      animation: appear 0.8s ease both;
+    }
+
+    .letter h2 {
+      text-align: center;
+      color: #376b9a;
+      margin: 0 0 25px;
+    }
+
+    .letter-text {
+      line-height: 1.9;
+      font-size: 15px;
+      color: #405d76;
+      overflow-wrap: anywhere;
+    }
+
+    .letter-text p {
+      margin: 0 0 22px;
+    }
+
+    .signature {
+      text-align: right;
+      margin-top: 26px;
+      color: #376b9a;
+      font-weight: bold;
+    }
+
+    .hint {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-top: 12px;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 10;
+      color: #e6b92e;
+      font-size: 17px;
+      animation: sparkleFade 0.8s ease-out forwards;
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        opacity: 1;
+        transform: scale(0.5) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.5) rotate(90deg);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        padding: 25px 16px;
+      }
+
+      .letter {
+        padding: 21px 16px;
+      }
+
+      .letter-text {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="decoration" style="top: 8%; left: 8%;">🩵</div>
+  <div class="decoration" style="top: 18%; right: 9%; animation-delay: 1s;">⭐</div>
+  <div class="decoration" style="bottom: 13%; left: 10%; animation-delay: 2s;">💛</div>
+  <div class="decoration" style="bottom: 9%; right: 8%; animation-delay: 1.5s;">✦</div>
+  <div class="decoration" style="top: 48%; left: 3%; animation-delay: 0.5s;">☁️</div>
+  <div class="decoration" style="top: 55%; right: 3%; animation-delay: 2.5s;">🦋</div>
+
+  <main class="container">
+    <section id="screen1">
+      <h1>Hiii!! 🩵</h1>
+      <p class="subtitle">There's something I'd like you to read...</p>
+      <p>Do you wish to proceed? 📨</p>
+
+      <div class="buttons">
+        <button class="yes" onclick="proceed()">Yes!˚ʚ♡ɞ˚</button>
+        <button class="no" onclick="sayNo()">No :<</button>
+      </div>
+
+      <p id="response" aria-live="polite"></p>
+    </section>
+
+    <section id="screen2" class="hidden">
+      <h1>Wait a second! 💛</h1>
+      <p class="subtitle">
+        Once you say yes, there is no going back.
+      </p>
+      <p>Are you sure? 🥹</p>
+
+      <div class="buttons">
+        <button class="yes" onclick="revealEnvelope()">I'm sure!˚ʚ♡ɞ˚</button>
+        <button class="no" onclick="sayNo()">No:<</button>
+      </div>
+
+      <p id="response2" aria-live="polite"></p>
+    </section>
+
+    <section id="screen3" class="hidden">
+      <h1>A little something for you 💌</h1>
+      <p>Tap the envelope to open your letter!</p>
+
+      <div
+        class="envelope"
+        onclick="openLetter()"
+        role="button"
+        tabindex="0"
+        aria-label="Open the letter"
+        onkeydown="if(event.key === 'Enter' || event.key === ' ') openLetter()"
+      ></div>
+
+      <p class="hint">
+        Made with a little courage and lots of care 🩵💛
+      </p>
+    </section>
+
+    <section id="screen4" class="hidden">
+      <h1>For You 🩵💛</h1>
+
+      <article class="letter">
+        <h2>Hiii!! ♡</h2>
+        <div id="letterText" class="letter-text"></div>
+        <div id="signature" class="signature"></div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    function showScreen(screenId) {
+      document.querySelectorAll("main section").forEach(section => {
+        section.classList.add("hidden");
+      });
+
+      document.getElementById(screenId).classList.remove("hidden");
+    }
+
+    function proceed() {
+      showScreen("screen2");
+    }
+
+    function sayNo() {
+      const response =
+        document.getElementById("screen1").classList.contains("hidden")
+          ? document.getElementById("response2")
+          : document.getElementById("response");
+
+      response.textContent = "Awww it's okay, maybe next time. :>";
+    }
+
+    function revealEnvelope() {
+      showScreen("screen3");
+    }
+
+    const confessionParagraphs = [
+      "Hiii!! I know this is a really interesting way to tell you this, but here we are.",
+      "I just wanted to let you know that I love you very very much, and you mean sooo much to me.",
+      "Your simple presence and smile light up my world.",
+      "I know this is really sudden, but I just cannot hide it anymore.",
+      "You dont have to say yes, but do you wanna be together again?",
+      "I know that that is a really big question to ask, but I promise you, i will be better.",
+      "I hope everything will go well if you ever say yes.",
+      "Again, no pressure, I just wanted to be honest with you. :))"
+    ];
+
+    async function typeText(element, text, speed = 24) {
+      for (const character of text) {
+        element.textContent += character;
+        await new Promise(resolve => setTimeout(resolve, speed));
+      }
+    }
+
+    async function openLetter() {
+      showScreen("screen4");
+
+      const letterText = document.getElementById("letterText");
+      const signature = document.getElementById("signature");
+
+      letterText.textContent = "";
+      signature.textContent = "";
+
+      for (const paragraphText of confessionParagraphs) {
+        const paragraph = document.createElement("p");
+        letterText.appendChild(paragraph);
+        await typeText(paragraph, paragraphText);
+      }
+
+      signature.textContent = "Love, Zul ♡";
+    }
+
+    document.addEventListener("mousemove", event => {
+      if (Math.random() > 0.78) {
+        const sparkle = document.createElement("span");
+        sparkle.className = "sparkle";
+        sparkle.textContent = Math.random() > 0.5 ? "✦" : "✧";
+        sparkle.style.left = event.clientX + "px";
+        sparkle.style.top = event.clientY + "px";
+
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 800);
+      }
+    });
+  </script>
 </body>
 </html>
+
