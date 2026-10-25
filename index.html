@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Little Message for You 𑣲ᢉ𐭩 </title>
+  <title>A Little Message for You 𑣲ᢉ𐭩</title>
 
   <style>
     * {
@@ -36,6 +36,7 @@
       0%, 100% {
         transform: translateY(0) rotate(-5deg);
       }
+
       50% {
         transform: translateY(-18px) rotate(8deg);
       }
@@ -141,13 +142,14 @@
       border-radius: 8px 8px 0 0;
     }
 
+    /* Envelope icon: ✉️ */
     .envelope::after {
-      content: "💌";
+      content: "✉️";
       position: absolute;
-      top: 31px;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
-      font-size: 29px;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
     }
 
     .letter {
@@ -196,6 +198,7 @@
         opacity: 0;
         transform: translateY(14px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -216,6 +219,7 @@
         opacity: 1;
         transform: scale(0.5) rotate(0deg);
       }
+
       100% {
         opacity: 0;
         transform: scale(1.5) rotate(90deg);
@@ -235,6 +239,15 @@
         font-size: 14px;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 
@@ -247,36 +260,50 @@
   <div class="decoration" style="top: 55%; right: 3%; animation-delay: 2.5s;">🦋</div>
 
   <main class="container">
+
+    <!-- SCREEN 1 -->
     <section id="screen1">
-      <h1>Hiii!! 🩵</h1>
-      <p class="subtitle">There's something I'd like you to read...</p>
+      <h1>Hey Clarence! 🩵</h1>
+
+      <p class="subtitle">
+        There's something I'd like you to read...
+      </p>
+
       <p>Do you wish to proceed? 📨</p>
 
       <div class="buttons">
         <button class="yes" onclick="proceed()">Yes!˚ʚ♡ɞ˚</button>
-        <button class="no" onclick="sayNo()">No :<</button>
+        <button class="no" onclick="sayNo()">No :&lt;</button>
       </div>
 
       <p id="response" aria-live="polite"></p>
     </section>
 
+    <!-- SCREEN 2 -->
     <section id="screen2" class="hidden">
       <h1>Wait a second! 💛</h1>
+
       <p class="subtitle">
         Once you say yes, there is no going back.
       </p>
+
       <p>Are you sure? 🥹</p>
 
       <div class="buttons">
-        <button class="yes" onclick="revealEnvelope()">I'm sure!˚ʚ♡ɞ˚</button>
-        <button class="no" onclick="sayNo()">No:<</button>
+        <button class="yes" onclick="revealEnvelope()">
+          I'm sure!˚ʚ♡ɞ˚
+        </button>
+
+        <button class="no" onclick="sayNo()">No:&lt;</button>
       </div>
 
       <p id="response2" aria-live="polite"></p>
     </section>
 
+    <!-- SCREEN 3: ENVELOPE -->
     <section id="screen3" class="hidden">
-      <h1>A little something for you 💌</h1>
+      <h1>A little something for you ✉️</h1>
+
       <p>Tap the envelope to open your letter!</p>
 
       <div
@@ -285,7 +312,7 @@
         role="button"
         tabindex="0"
         aria-label="Open the letter"
-        onkeydown="if(event.key === 'Enter' || event.key === ' ') openLetter()"
+        onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openLetter(); }"
       ></div>
 
       <p class="hint">
@@ -293,15 +320,19 @@
       </p>
     </section>
 
+    <!-- SCREEN 4: CONFESSION -->
     <section id="screen4" class="hidden">
       <h1>For You 🩵💛</h1>
 
       <article class="letter">
         <h2>Hiii!! ♡</h2>
+
         <div id="letterText" class="letter-text"></div>
+
         <div id="signature" class="signature"></div>
       </article>
     </section>
+
   </main>
 
   <script>
@@ -330,6 +361,7 @@
       showScreen("screen3");
     }
 
+    // YOUR ORIGINAL LETTER — WORDING PRESERVED
     const confessionParagraphs = [
       "Hiii!! I know this is a really interesting way to tell you this, but here we are.",
       "I just wanted to let you know that I love you very very much, and you mean sooo much to me.",
@@ -344,11 +376,19 @@
     async function typeText(element, text, speed = 24) {
       for (const character of text) {
         element.textContent += character;
-        await new Promise(resolve => setTimeout(resolve, speed));
+
+        await new Promise(resolve => {
+          setTimeout(resolve, speed);
+        });
       }
     }
 
+    let letterOpened = false;
+
     async function openLetter() {
+      if (letterOpened) return;
+
+      letterOpened = true;
       showScreen("screen4");
 
       const letterText = document.getElementById("letterText");
@@ -359,26 +399,32 @@
 
       for (const paragraphText of confessionParagraphs) {
         const paragraph = document.createElement("p");
+
         letterText.appendChild(paragraph);
+
         await typeText(paragraph, paragraphText);
       }
 
       signature.textContent = "Love, Zul ♡";
     }
 
+    // CURSOR SPARKLES
     document.addEventListener("mousemove", event => {
       if (Math.random() > 0.78) {
         const sparkle = document.createElement("span");
+
         sparkle.className = "sparkle";
         sparkle.textContent = Math.random() > 0.5 ? "✦" : "✧";
         sparkle.style.left = event.clientX + "px";
         sparkle.style.top = event.clientY + "px";
 
         document.body.appendChild(sparkle);
+
         setTimeout(() => sparkle.remove(), 800);
       }
     });
   </script>
 </body>
 </html>
+
 
